@@ -1,5 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+
+import type UserType from './user.js'
+import User from './user.js'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
 // table.increments('id')
 // table.string('title').notNullable()
 // table.integer('user_id').unsigned().references('id').inTable('users')
@@ -29,4 +33,7 @@ export default class Resume extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => User)
+  user!: HasOne<typeof UserType>
 }

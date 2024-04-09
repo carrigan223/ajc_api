@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import User from './user.js'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
 
 // table.increments('id')
 // table.string('name').notNullable()
@@ -46,4 +48,7 @@ export default class Application extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @hasOne(() => User)
+  user!: HasOne<typeof User>
 }
